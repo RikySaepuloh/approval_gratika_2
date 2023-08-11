@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "641131270626",
+    "project_id": "approval-gratika-8f211",
+    "storage_bucket": "approval-gratika-8f211.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:641131270626:android:d0eb54e68acf800b9de9bb",
+        "android_client_info": {
+          "package_name": "id.esaku.approval_gratika"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "641131270626-qsdut56ci22ijj9c17h7aoj9fhku7k85.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.esaku.approval_gratika",
+            "certificate_hash": "e69ddedd38e69777935e358cf68e5bc9c07fbaa7"
+          }
+        },
+        {
+          "client_id": "641131270626-dab0k6aacf68sujtuncfvl3vgo4haki2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATyOeaxGXDee6u9xdtNjjdRD2gHngN9sQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "641131270626-dab0k6aacf68sujtuncfvl3vgo4haki2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
