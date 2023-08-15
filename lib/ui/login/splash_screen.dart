@@ -1,9 +1,7 @@
 import 'package:approval_gratika/app_routes.dart';
 import 'package:approval_gratika/constants.dart';
 import 'package:approval_gratika/shared_preferences_utils.dart';
-import 'package:approval_gratika/ui/main/main_screen.dart';
 import 'package:flutter/material.dart';
-import 'login_screen.dart'; // Import the LoginScreen
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -38,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: CircularProgressIndicator(color: Colors.white,),
+        child: CircularProgressIndicator(color: AppColors.primaryColor,),
       ),
     );
   }

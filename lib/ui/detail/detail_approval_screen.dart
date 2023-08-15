@@ -2,6 +2,7 @@ import 'package:al_downloader/al_downloader.dart';
 import 'package:approval_gratika/check_permission.dart';
 import 'package:approval_gratika/constants.dart';
 import 'package:approval_gratika/model/approval_detail.dart';
+import 'package:approval_gratika/ui/detail/pdf_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -629,6 +630,11 @@ class _DetailApprovalScreenState extends State<DetailApprovalScreen>
                 if (item != null) {
                   return InkWell(
                     onTap: () {
+                      item.file_dok.substring(item.file_dok.lastIndexOf('.') + 1) == "pdf"?
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => PDFViewer(fileURL:item.file_dok)),
+                        ):print("Download File");
                       // FileDownloader.downloadFile(
                       //     url: item.file_dok,
                       //     name: item.no_gambar,
@@ -656,12 +662,13 @@ class _DetailApprovalScreenState extends State<DetailApprovalScreen>
                             height: 10,
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               buildIconDocument(item.file_dok),
+                              SizedBox(width: 20,),
                               Flexible(
                                 flex: 1,
                                 child: Container(
+                                  width: MediaQuery.of(context).size.width,
                                   child: Text(
                                     item.no_gambar,
                                     overflow: TextOverflow.ellipsis,
@@ -676,7 +683,7 @@ class _DetailApprovalScreenState extends State<DetailApprovalScreen>
                                 Icons.download_rounded,
                                 color: Colors.grey,
                               ))
-                            ],
+                            ] ,
                           ),
                           SizedBox(
                             height: 12,

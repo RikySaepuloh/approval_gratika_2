@@ -1,5 +1,6 @@
 import 'package:approval_gratika/constants.dart';
 import 'package:approval_gratika/ui/main/main_screen.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:local_auth/local_auth.dart';
@@ -13,7 +14,13 @@ class LoginScreen extends StatefulWidget {
 
 
 
+
+
 class _LoginScreenState extends State<LoginScreen> {
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  late String FCMToken = "";
+  final LoginViewModel viewModel = LoginViewModel();
+
   bool _obscureText = true;
 
   Future<void> _authenticateWithBiometrics() async {
@@ -65,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<LoginViewModel>(context);
+    // final viewModel = Provider.of<LoginViewModel>(context);
 
     Color getColor(Set<MaterialState> states) {
       const Set<MaterialState> interactiveStates = <MaterialState>{
@@ -192,7 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(backgroundColor: AppColors.primaryColor),
                                 onPressed: (){
-                                  viewModel.login(() {
+                                  viewModel.login(FCMToken,() {
                                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => MainScreen()));
                                     // Navigator.pushReplacementNamed(context, AppRoutes.main);
                                   });
@@ -242,6 +249,16 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    _firebaseMessaging.getToken().then((token) {
+      print("FCM Token: $token");
+      FCMToken = token!;
+      // Send this token to your server
+    });
+    super.initState();
   }
 }
 //

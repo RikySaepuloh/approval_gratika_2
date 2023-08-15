@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
 import '../../app_routes.dart';
 import '../../model/push_notification.dart';
-import '../login/detail/detail_approval_screen.dart';
+import '../detail/detail_approval_screen.dart';
 import '../notification_badge.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -171,7 +171,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 15),
-                    NotificationBadge(totalNotifications: _totalNotifications),
                     Text(
                       "Approval Management\nSystem",
                       style:

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:approval_gratika/constants.dart';
 import 'package:approval_gratika/shared_preferences_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 
 
@@ -13,13 +14,21 @@ class LoginViewModel extends ChangeNotifier {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   LoginViewModel() {
+    _initializeValues();
+  }
+
+  Future<void> _initializeValues() async {
+    if(await SharedPreferencesUtils.getTetapMasuk() == true){
+      username = await SharedPreferencesUtils.getUsername() ?? '';
+      password = await SharedPreferencesUtils.getPassword() ?? '';
+    }
     usernameController.text = username;
     passwordController.text = password;
+    notifyListeners();
   }
 
 
-
-  Future<void> login(Function() navigateToHome) async {
+  Future<void> login(String token,Function() navigateToHome) async {
     isLoading = true;
     notifyListeners();
 
@@ -41,6 +50,7 @@ class LoginViewModel extends ChangeNotifier {
 
       // Save the token to SharedPreferences
       await SharedPreferencesUtils.saveLoginToken(loginToken);
+      await SharedPreferencesUtils.saveTetapMasuk(isTetapMasuk);
       if(isTetapMasuk){
         await SharedPreferencesUtils.saveUsername(username);
         await SharedPreferencesUtils.savePassword(password);
@@ -51,6 +61,15 @@ class LoginViewModel extends ChangeNotifier {
       navigateToHome();
     } else {
       // Login failed
+      Fluttertoast.showToast(
+        msg: "Username/Password salah!",
+        toastLength: Toast.LENGTH_SHORT, // Duration for which the toast should be visible
+        gravity: ToastGravity.BOTTOM, // Position of the toast message on the screen
+        backgroundColor: Colors.grey[700], // Background color of the toast message
+        textColor: Colors.white, // Text color of the toast message
+        fontSize: 16.0, // Font size of the toast message text
+      );
+
       print('Invalid username or password!');
     }
 

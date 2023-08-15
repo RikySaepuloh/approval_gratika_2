@@ -4,7 +4,7 @@ import 'package:approval_gratika/repository/repository.dart';
 import 'package:approval_gratika/utils.dart';
 import 'package:flutter/material.dart';
 
-import '../login/detail/detail_history_screen.dart';
+import '../detail/detail_history_screen.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});

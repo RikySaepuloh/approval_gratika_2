@@ -6,6 +6,11 @@ class SharedPreferencesUtils {
     await prefs.setString('loginToken', token);
   }
 
+  static Future<void> saveTetapMasuk(bool tetapMasuk) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('tetapMasuk', tetapMasuk);
+  }
+
   static Future<void> saveUsername(String username) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('username', username);
@@ -29,6 +34,11 @@ class SharedPreferencesUtils {
   static Future<String?> getPassword() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('password');
+  }
+
+  static Future<bool?> getTetapMasuk() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('tetapMasuk');
   }
 
   static Future<void> clearLoginToken() async {

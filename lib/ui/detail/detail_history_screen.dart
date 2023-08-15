@@ -11,6 +11,7 @@ import 'package:timeline_tile/timeline_tile.dart';
 import '../../../directory_path.dart';
 import '../../../repository/repository.dart';
 import '../../../utils.dart';
+import 'pdf_viewer.dart';
 
 class DetailHistoryScreen extends StatefulWidget {
   final String no_bukti;
@@ -398,6 +399,11 @@ class _DetailHistoryScreenState extends State<DetailHistoryScreen>
                 if (item != null) {
                   return InkWell(
                     onTap: () {
+                      item.file_dok.substring(item.file_dok.lastIndexOf('.') + 1) == "pdf"?
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => PDFViewer(fileURL:item.file_dok)),
+                      ):print("Download File");
                       // FileDownloader.downloadFile(
                       //     url: item.file_dok,
                       //     name: item.no_gambar,

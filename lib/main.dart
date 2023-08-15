@@ -12,6 +12,29 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 
+FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+FlutterLocalNotificationsPlugin();
+
+Future<void> _showNotification(RemoteMessage message) async {
+  const AndroidNotificationDetails androidPlatformChannelSpecifics =
+  AndroidNotificationDetails(
+    'channel_for_receiving_approval_notification', // Replace with a unique channel ID
+    'Approval Gratika', // Replace with a channel name
+    importance: Importance.max,
+    priority: Priority.high,
+  );
+
+  const NotificationDetails platformChannelSpecifics =
+  NotificationDetails(android: androidPlatformChannelSpecifics);
+
+  await flutterLocalNotificationsPlugin.show(
+    0, // Notification ID
+    message.notification?.title ?? 'Notification Title', // Title
+    message.notification?.body ?? 'Notification Body', // Body
+    platformChannelSpecifics,
+    // payload: 'Custom_Sound', // Optional payload
+  );
+}
 
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -19,7 +42,6 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // Handle the background message here
 }
 
-}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -81,36 +103,15 @@ class _MyAppState extends State<MyApp> {
   // }
 
 
+
+
   @override
   void initState() {
     super.initState();
 
     const AndroidInitializationSettings initializationSettingsAndroid =
     AndroidInitializationSettings('app_icon'); // Replace with your app's icon name
-    final InitializationSettings initializationSettings =
-    InitializationSettings(android: initializationSettingsAndroid);
-    flutterLocalNotificationsPlugin.initialize(initializationSettings);
-    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
-    Future<void> _showNotification(RemoteMessage message) async {
-      const AndroidNotificationDetails androidPlatformChannelSpecifics =
-      AndroidNotificationDetails(
-        'channel_for_receiving_approval_notification', // Replace with a unique channel ID
-        'Approval Gratika', // Replace with a channel name
-        importance: Importance.max,
-        priority: Priority.high,
-      );
 
-      const NotificationDetails platformChannelSpecifics =
-      NotificationDetails(android: androidPlatformChannelSpecifics);
-
-      await flutterLocalNotificationsPlugin.show(
-        0, // Notification ID
-        message.notification?.title ?? 'Notification Title', // Title
-        message.notification?.body ?? 'Notification Body', // Body
-        platformChannelSpecifics,
-        payload: 'Custom_Sound', // Optional payload
-      );
   }
 
   @override
